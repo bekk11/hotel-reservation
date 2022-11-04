@@ -26,6 +26,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 AUTH_USER_MODEL = 'user.User'
 
 # Application definition
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
     'apps.gallery',
     'apps.kitchen',
     'apps.reservation',
+    'apps.type_room',
     'apps.room',
     'apps.service',
 ]
