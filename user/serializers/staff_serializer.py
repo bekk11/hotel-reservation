@@ -6,7 +6,7 @@ from rest_framework.utils import model_meta
 from user.models import User
 
 
-class ClientSerializer(ModelSerializer):
+class StaffSerializer(ModelSerializer):
     class Meta:
         model = User
         exclude = [
@@ -31,7 +31,7 @@ class ClientSerializer(ModelSerializer):
                 many_to_many[field_name] = validated_data.pop(field_name)
 
         try:
-            instance = ModelClass._default_manager.create_user(**validated_data)
+            instance = ModelClass._default_manager.create_staff(**validated_data)
         except TypeError:
             tb = traceback.format_exc()
             msg = (
