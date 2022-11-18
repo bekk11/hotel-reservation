@@ -1,11 +1,14 @@
 from django.db import models
 
 from apps.category.models import Category
+from apps.type_room.models import TypeRoom
 
 
 class Room(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    type_room = models.ForeignKey(TypeRoom, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, null=True, blank=True)
+    area = models.CharField(max_length=15)
     info = models.CharField(max_length=500)
     image1 = models.ImageField(upload_to='rooms/image1/')
     image2 = models.ImageField(upload_to='rooms/image2/')
@@ -13,9 +16,6 @@ class Room(models.Model):
     image4 = models.ImageField(upload_to='rooms/image4/')
     floor = models.IntegerField(default=1)
     room_number = models.CharField(max_length=10)
-    bedroom = models.IntegerField(default=0)
-    hall = models.IntegerField(default=0)
-    bathroom = models.IntegerField(default=0)
     single_beds = models.IntegerField(default=0)
     double_beds = models.IntegerField(default=0)
     air_conditioner = models.BooleanField(default=False)

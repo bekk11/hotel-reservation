@@ -9,4 +9,7 @@ urlpatterns = [
     path('service/', include('apps.service.urls')),
     path('type-room/', include('apps.type_room.urls')),
     path('room/', include('apps.room.urls')),
+    path('reservation/', include('apps.reservation.urls')),
+    path('event/', include('apps.event.urls')),
+    path('user/', include('user.urls')),
 ]

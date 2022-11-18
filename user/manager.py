@@ -9,3 +9,8 @@ class NewUserManager(UserManager):
         extra_fields.setdefault("is_superuser", False)
 
         return self._create_user(email, phone, password, **extra_fields)
+
+    def create_user(self, email=None, password=None, **extra_fields):
+        extra_fields.setdefault("is_staff", False)
+        extra_fields.setdefault("is_superuser", False)
+        return self._create_user(username=email, email=email, password=password, **extra_fields)
