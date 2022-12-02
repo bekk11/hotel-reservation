@@ -9,9 +9,16 @@ from apps.room.serilaizers.room_serializer import RoomSerializer
 class ListRoom(ListAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
-    filter_backends = [
-        django_filters.rest_framework.DjangoFilterBackend
-    ]
+    search_fields = (
+        'name',
+        'area',
+        'info',
+        'single_beds',
+        'double_beds',
+        'price',
+        'category__name',
+        'type_room__name',
+    )
     filterset_fields = (
         'category',
         'type_room',
@@ -23,4 +30,6 @@ class ListRoom(ListAPIView):
         'wifi',
         'TV',
         'busy',
+        'single_beds',
+        'double_beds',
     )

@@ -27,6 +27,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 AUTH_USER_MODEL = 'user.User'
 
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'whitenoise',
     'corsheaders',
     'django_filters',
+    'djoser',
 
     # apps
     'user',
@@ -102,7 +104,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #     }
 # }
 
-POSTGRESQL = True
+POSTGRESQL = False
 
 if POSTGRESQL:
     DATABASES = {
@@ -170,5 +172,39 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.TokenAuthentication',
+    ),
 }
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
+}
+
+DJOSER = {
+    'LOGIN_FIELD': 'email',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'SET_USERNAME_RETYPE': True,
+    'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {
+        'user_create': 'user.serializers.client_create_serializer.UserCreateSerializer',
+        'user': 'user.serializers.client_create_serializer.UserCreateSerializer',
+        'user_delete': 'user.serializers.client_create_serializer.UserCreateSerializer'
+    }
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'toshpulatovbekki73@gmail.com'
+EMAIL_HOST_PASSWORD = '445-11-22aA'
+EMAIL_USE_TLS = True
+

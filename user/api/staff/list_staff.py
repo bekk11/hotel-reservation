@@ -13,4 +13,5 @@ class ListStaff(ListAPIView):
         'last_name',
         'email',
         'phone',
+        'date_joined',
     ]
