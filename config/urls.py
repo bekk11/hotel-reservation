@@ -15,17 +15,21 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path, include
+from rest_framework_simplejwt.views import (
+    TokenRefreshView,
+)
 
 from config import settings
+from user.api.auth.custom_token import CustomToken
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('apps/', include('config.app_urls.urls')),
 
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
+    path('api/token/', CustomToken.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
