@@ -8,7 +8,7 @@ from user.models import User
 class Reservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ManyToManyField(Room)
-    service = models.ManyToManyField(Service, blank=True, null=True)
+    service = models.ManyToManyField(Service)
     from_time = models.DateTimeField()
     to_time = models.DateTimeField()
     detail = models.CharField(max_length=600)
