@@ -6,4 +6,4 @@ from apps.reservation.models import Reservation
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
-        fields = '__all__'
+        exclude = ['user', 'paid']
